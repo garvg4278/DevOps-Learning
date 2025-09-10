@@ -1,0 +1,71 @@
+DevOps Day 1
+
+
+
+Learning Linux and it's command
+
+pwd	#show current location
+whoami	#current user
+date	#show day, date, time, time zone
+date +%	#personalized view
+ls 	#files and folders in the current location
+ls -lt	#detailed information for the files and folders
+ls -ltr	#reverse sorted 
+ls -lh 	#human readable details
+clear	#clear the Linux terminal
+
+
+Cleaning Deleting Editing
+
+cat <filename>	#read the file
+less <file>	#read and search in file
+	/search_word	#to search the specific word
+	n		#to move to next specific word
+	SHIFT+G		#move to bottom of the file
+	P		#move to the top of the file
+	?search_word	#to search from the bottom
+	Q		#exit the editor
+more <filename>	#to view content of the file page by page
+touch <filename> #to create a new file
+rm <filename>	#delete a file
+vi <filename> 	#to create a file and edit a new file
+	I	#to start editing in the file
+	Esc	#to finish editing
+	SHIFT+:+wq #to save and exit the editor
+nano <file_name>	#advance tool for editing
+mkdir <dir_name>	#make a new folder
+rmdir <dir_name>	#delete existing directory 
+rm -rf <dir_name>	#delete existing directory
+
+
+Path Commands
+
+cd/path/folder 	#changing path of the current location 
+cd ..		#get back to the previous folder
+
+
+Files
+
+cp <file_name> <path_to_paste>	#to copy a file from on location to other
+cp <file_name> <new_file_name> 	#to make a copy of a file
+mv <file_name> <folder_name> 	# to move a file to another folder
+mv <old_file_name> <new_file_name> 	#changing the file name
+head -5 <file_name> 	#top 5 line in a file
+tail -5 <file_name>	#last 5 line in a file
+sort <file_name>	#sort content in the file
+sort -r <file_name>	#sort in reverse order
+sort <file_name> | uniq	#sort unique content from the file
+split -l 3 files	#divide content for each 3 line
+grep "word" <file_name>	#seach a word and display matching content from a file
+egrep "word1|word2" <file_name> 	#seach multiple words and display matching content from a file
+shuf <file_name> 	#to shuffle data in the file
+wc -l <file_name>	#to count the number of lines
+cmp file1 file2		#to check if 2 files are identical
+diff -u file1 file2	#to compare and display difference between two files 
+find /path -name <file_name>	#to search a file 
+updated + locate <file_name>	#faster way to locate file
+
+Wildcards
+
+*	#when searching for a particular string
+[]	#to give the range
