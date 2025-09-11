@@ -1,0 +1,107 @@
+DevOps Days 2
+
+
+
+Utility Commands
+
+history	#to see previous commands
+help	#to check valid options available
+man	#to get more info for more information about a command
+which 	#to check which executable is using for a command
+bc	#to use a calculator
+cal	#to check calendar
+uptime	#to check how long system is running
+script	#to record a activity 
+	CTRL+D	#to end script
+
+
+Alias
+
+alias l="<command>"	#to create a shortcut for a command
+alias -p	#to see present shortcuts
+
+
+Compress and Decompress
+
+gzip -k <file>	#to zip a file and keep the original file also
+gunzip <file>	#to unzip a file
+tar -czf <new_file_name> <folder_name>	#to compress a folder
+tar-xzf <file_name> #decompress a folder
+zip <file> file1 file2	#to zip multiple files
+zip -l <file_name>	#to list files in zipped file
+unzip <file_name>	#to unzip a folder
+
+
+Downloading files from Internet
+wget URL	#to download a file
+wget -O <filename> URL 	#to download a file with a specific name
+curl <API>	#to call a api
+apt or yum/dnf	#to install an application
+rpm -qa | grep app	#to check if an application is installed
+dnf list installed	#to check if an application is installed
+apt search <package_name>	#to list available packages to install 
+yum/dnf list available 	#to list available packages to install 
+
+
+Service Control
+
+systemctl start/stop service_name	#to start and stop a service 
+systemctl list-units --type=service --all	#to list all service
+
+
+Environment Variables
+
+printenv	#to list all existing variables
+export <variable_name>="<path>"		#to declares and exports an environment variable
+export PATH=$<environment/bin:$PATH	#to updates the PATH to include the new binary location
+Add env variable in ./bashrc file THEN source ~/.bashrc_profile		#to add a new env var permanently 
+
+
+String operations
+
+awk -F,'{print $2}' file.csv	#to print a specific content from a file
+cut -c1-2 file.txt	#to display starting two characters of all line
+
+sed -n "5p" file.txt		#to display a specific line 
+sed -n 's/from/to/g' file.txt	#to replace a specific word
+
+tr [:lower:] [:upper:] <file.txt	#lowercase to uppercase
+tr [:punct:] Z <file.txt		#replace all punctuation to Z character
+te [:digit:] Z <file.txt		#replace all digit to Z character
+tr -d Z <file.txt			#delete Z character
+truncate -s 100M file.txt		#to extend or shrink size of a file
+
+echo	#to print on screen
+echo "ABC" | fold -w1	#to display content vertically 
+
+
+Switch user and sudo
+
+su <user_name>	#to switch user
+exit		#to exit current user or close terminal
+sudo		#to execute a command when not a root user
+
+
+Access Remote Linux Server
+
+ssh user@hostname 	#to access remote Linux server 
+scp file user@hostname:/tmp/ 	#to copy a file to a remote Linux server
+
+
+Working with Permissions
+
+ls -ltr			#to check permissions of a file
+	user-group-other	r(read) w(write) x(execute)
+chmod a+rwx file.txt	#to modify permissions of a file
+	u(user) g(group) o(other) a(all)
+chown <new_owner> file.txt	#to change the ownership of a file
+chgrp <new_group> file.txt	#to change group ownership of a file
+
+
+Memory info command
+
+free	#to check free RAM space
+free -h	#to check free RAM space human readable
+top	#to check % memory and CPU Utilization
+du	#to check disk utilization 
+df	#to check filesystem available and disk space allocated
