@@ -1,0 +1,51 @@
+DevOps Day 3
+
+
+
+System Info 
+
+hostname	#to check machine name
+lscpu		#to check CPU/core/thread info 
+arch 		#to check the architecture
+lsblk		#to see list of storage devices, disk partition
+uname -a	#OS name of server
+cat /etcos-release	#more info about OS
+
+
+Process Management
+
+ps -ef | grep <process>	#to check if a process is running or not
+pgrep <process>		#to get PID of a process
+kill -9 PID		#to stop a process by PID
+pkill <process>		#to stop a process by its name
+jobs			#to see all the active jobs
+bg			#to resume a job in background
+fg 			#to resume a task in foreground
+nohup ./script >/dev/null &	#to run a script in background
+
+
+Networking 
+
+ifconfig	#to see ip of of machine
+ping <website>	#to see if a website is accessible
+telnet IP Port	#to check if a IP:PORT is accessible and open
+netstat -putan	#to check if a port is open or not on server
+traceroute	#to check all hubs in network path to reach a website
+reboot		#to reboot Linux server
+shutdown	#to shutdown Linux server
+
+
+User Creation
+
+useradd		#to create a new user on our Linux server
+passwd		#to change the password for the user
+groupadd	#to create a new group
+id user		#to check UserId or GroupID
+userdel <user>	#delete a user
+groupdel <group>	#delete a group
+
+
+
+Automation Commands
+
+at	#to schedule a command
