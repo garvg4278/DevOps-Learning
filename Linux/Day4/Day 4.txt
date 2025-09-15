@@ -1,0 +1,15 @@
+DevOps Day 4
+
+
+
+Disk & Memory commands
+
+df -h				#to check disk usage
+du -sh *                 	#to check folder sizes
+du -ah /var | sort -rh | head -5	#to sort by biggest files
+free -h                  	#to check memory usage
+top              		#to see live processes
+cat /proc/meminfo		#to see memory info
+cat /proc/cpuinfo | head	#to see CUP info
+uptime				#to see the uptime of the machine
+uname -a			#to see the name of the machine

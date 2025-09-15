@@ -1,0 +1,29 @@
+===== System Report =====
+Monday 15 September 2025 05:34:13 PM IST
+
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.9G     0  1.9G   0% /dev
+/dev/sda1        94G   18G   72G  20% /
+
+Top 5 Largest Files in /var/log
+180M	/var/log
+162M	/var/log/journal
+161M	/var/log/journal/30a6ce78778f428f974da604305109e4
+25M	/var/log/journal/30a6ce78778f428f974da604305109e4/system.journal
+18M	/var/log/installer
+
+Memory Usage:
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       1.5Gi       1.7Gi       1.9Mi       937Mi       2.3Gi
+Swap:          4.0Gi          0B       4.0Gi
+
+CPU Info:
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 25
+model		: 68
+model name	: AMD Ryzen 5 7235HS
+
+Uptime:
+ 17:34:13 up  1:08,  1 user,  load average: 0.00, 0.05, 0.01
