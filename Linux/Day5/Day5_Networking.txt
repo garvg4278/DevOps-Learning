@@ -1,0 +1,15 @@
+Devops Day 5
+
+
+
+Networking
+
+ifconfig		#to check the network configuration
+ping -c 4 google.com	#to check the network connectivity
+curl ifconfig.me	#to check the public ip
+wget <url>		#to download something 
+netstat -tulnp		#to diplay active listing ports
+ss -tulnp		#advance version for netstart
+traceroute google.com	#to get the path taken by the packet to travel the server
+nslookup google.com 	#to get the ip address of domain
+dig google.com 		#advance DNS

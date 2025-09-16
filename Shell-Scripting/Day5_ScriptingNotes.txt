@@ -1,0 +1,64 @@
+What is Linux Shell?
+A shell provide an environment to a user to execute commands and interact with kernel.
+
+
+Application
+|
+V
+Shell
+|
+V
+Kernel
+|
+V
+Hardware
+
+
+There are different types of shell
+-bash
+-sh
+-ksh
+-tsh
+-fish
+-zsh
+
+
+What is my shell type
+echo $0
+
+
+What is shell scripting?
+-Shell script consist of set of commands to perform a task.
+-All the commands execute sequentially.
+-Some task like file manipulation program execution, user interaction, automation of task etc can be done.
+
+
+First Basic Script
+
+#!/bin/bash			#shebang
+echo "Hello World"		#to print the output
+
+
+How to run a script
+-Make sure the script has a execute permission --x
+	chmod -x <script_name>
+-Run the script
+	./<script_name>
+
+		OR
+
+- bash <script_name>
+
+
+What are variables?
+VAR_NAME=value
+VAR_NAME=$(hostname)
+echo $VAR_NAME
+
+
+Constant Variable
+Once you defined a variable and don't wanna change it until end of the script.
+readonly var_name="Hi"
+
+
+

@@ -1,0 +1,21 @@
+===== IP Address =====
+    inet 127.0.0.1/8 scope host lo
+    inet6 ::1/128 scope host noprefixroute 
+    inet 192.168.222.128/24 brd 192.168.222.255 scope global dynamic noprefixroute eth0
+    inet6 fe80::20c:29ff:fee2:aa8/64 scope link noprefixroute 
+
+===== Pinging Google =====
+PING google.com (142.250.192.78) 56(84) bytes of data.
+64 bytes from bom12s16-in-f14.1e100.net (142.250.192.78): icmp_seq=1 ttl=128 time=53.1 ms
+64 bytes from bom12s16-in-f14.1e100.net (142.250.192.78): icmp_seq=3 ttl=128 time=37.6 ms
+64 bytes from bom12s16-in-f14.1e100.net (142.250.192.78): icmp_seq=4 ttl=128 time=63.3 ms
+
+--- google.com ping statistics ---
+4 packets transmitted, 3 received, 25% packet loss, time 3027ms
+rtt min/avg/max/mdev = 37.563/51.311/63.277/10.573 ms
+
+===== Top 5 Listening Connections =====
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                           
+udp   UNCONN 0      0        224.0.0.251:5353      0.0.0.0:*    users:(("chrome",pid=8116,fd=70))
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*                                     
+tcp   LISTEN 0      128             [::]:22           [::]:*                                     
