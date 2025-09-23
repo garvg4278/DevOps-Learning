@@ -1,0 +1,216 @@
+What is Linux Shell?
+A shell provide an environment to a user to execute commands and interact with kernel.
+
+
+Application
+|
+V
+Shell
+|
+V
+Kernel
+|
+V
+Hardware
+
+
+There are different types of shell
+-bash
+-sh
+-ksh
+-tsh
+-fish
+-zsh
+
+
+What is my shell type
+echo $0
+
+
+What is shell scripting?
+-Shell script consist of set of commands to perform a task.
+-All the commands execute sequentially.
+-Some task like file manipulation program execution, user interaction, automation of task etc can be done.
+
+
+First Basic Script
+
+#!/bin/bash			#shebang
+echo "Hello World"		#to print the output
+
+
+How to run a script
+-Make sure the script has a execute permission --x
+	chmod -x <script_name>
+-Run the script
+	./<script_name>
+
+		OR
+
+- bash <script_name>
+
+
+What are variables?
+VAR_NAME=value
+VAR_NAME=$(hostname)
+echo $VAR_NAME
+
+
+Constant Variable
+Once you defined a variable and don't wanna change it until end of the script.
+readonly var_name="Hi"
+
+
+
+
+Arrays
+
+How to define an array?
+myArray=( 1 2 Hello "Hey man")		#space separated values
+
+How to get value from an array?
+echo"${myArray[0]}"
+echo"${myArray[*]}"
+
+How to get the length of array?
+echo "${#myArray[*]}"
+
+How to get specific values?
+echo "${myarray[*]:1}"
+echo "${myarray[*]:1:2}"
+
+How to update an array?
+myArray+=(5 6 8)
+
+Array Key-Value
+declare -A myArray
+myArray-([name]=Garv [age]=21)
+echo "${myArray[name]}"
+
+
+
+
+String Operations
+
+myVar="Hello World!"
+lenght=${#myVar}
+upper=${x^^}
+lower=${y,,}
+replace=${myVar/World/Buddy}
+slice=${myVar:6:11}
+
+
+
+
+User Interaction
+
+read <var_name>
+read -p "Your name" Name
+
+
+
+
+Arithmetic Operations 
+
+let a++ 	OR	$((a++))
+let a=5*12	OR 	$((a=5*10))
+
+
+Comparision Operators
+
+==	-ep/==
+>=	-ge
+<=	-le
+!=	-ne/!=
+>	-gt
+<	-le
+
+
+
+
+Conditional Statement
+
+If-Else
+if [[ $marks -gt 40 ]]
+then
+	echo "You are pass"
+else
+	echo "You are fail"
+fi
+
+
+Elif
+
+if [ $marks -ge 80 ]
+then
+	echo "First Division"
+elif [ $marks -ge 60 ]
+then
+	echo "Second Division"
+else
+	echo "Fail"
+
+
+Case
+
+read choice
+case $choice in
+	a)--;;
+	b)--;;
+	*)echo "Not a valid input"
+esac
+
+
+Logical Operators
+
+AND 	&&
+OR	||
+
+
+
+
+Loops
+
+For Loop
+for i in {1..20}
+do
+	//statements
+done
+
+While Loop
+while [ //condition ]
+do
+	//statements
+done
+
+Until Loop			#until the condition is false it will loop
+until [ //condition ]
+do
+	//statements
+done
+
+Infinite Loop
+while true
+do 
+	//statement
+done
+
+While Loop to Read a csv file
+while IFS="," read f1 f2 f3
+do
+	echo $f1
+	echo $f2
+	echo $f3
+done < file_name.csv
+
+cat myfile.csv | awk 'NR!=1 {print}' | while IFS="," read f1 f2 f3 			#this skips the first header line
+
+
+
+
+Functions
+
+What are functions?
+-> Block of cod which perform some task and run when it is called.
+-> Can be reuse many times in out program which lessen our lines of code.
+-> We can pass arguments to the method	
