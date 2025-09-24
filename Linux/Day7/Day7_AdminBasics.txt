@@ -1,0 +1,42 @@
+Day 7
+
+
+
+
+Users & Groups
+
+whoami				#display the current user
+id				#display the id's
+groups				#display the groups the current is member of
+sudo useradd testuser		#create a new user
+sudo passwd testuser		#sets the password for new created user
+sudo usermod -aG sudo testuser	#grant the user admin privileges
+
+
+Permissions 
+
+ls -l				#list files in long format
+chmod 755 file.txt		#changing the privileges 
+chown user:group file.txt	#changing the owner of the file 
+umask				#display or set the default permission mask
+
+
+Services & Logs
+
+systemctl status ssh		#display the current status of the SSH services
+systemctl restart ssh		#restart the SSH service
+journalctl -xe			#display the system journal logs
+tail -n 50 /var/log/syslog	#display the last 50 lines of the system log
+
+
+Archiving & Compression
+
+tar -cvf archive.tar folder/	#create a archive 
+tar -xvf archive.tar		#extract the content 
+gzip file.txt			#compress the file
+gunzip file.txt.gz		#decompress the file
+zip archive.zip file.txt	#zip the file
+unzip archive.zip		#unzip the file
+
+
+
