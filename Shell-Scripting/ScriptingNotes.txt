@@ -214,3 +214,89 @@ What are functions?
 -> Block of cod which perform some task and run when it is called.
 -> Can be reuse many times in out program which lessen our lines of code.
 -> We can pass arguments to the method	
+
+How to make Functions?
+functions myfun{
+	echo "Hi"}
+	OR
+myfun(){
+	echo "Hi"}
+
+
+functions hello{
+	echo "Hello $1"}
+hello ram 
+
+
+
+
+
+Argument Passing
+
+To get no. of arguments		:$#
+To display all arguments	:$@
+To use or display a argument 	:$1 $2
+
+shift		-To shift an argument
+
+break		-#to stop the loop
+continue 	-#to stop current iteration
+sleep 		-#to create delay 
+exit		-#to stop the script 
+$?		-#to check if the previous command was successful 
+basename	-#to strip directory name and give only file name
+dirname		-#to strip the filename and gives directory path
+realapth	-#to give you full path for a file
+if [ -d folder]	-#if folder exist
+[ ! -d folder] 	-#if folder not exist
+if [ -f file]	-#if file exist
+if [ !-f file ]	-#if file not exist
+RANDOM		-#a random int 0-32767 is generated
+UID		-#user ID of the user logged in 
+
+
+
+
+Dev/Null
+
+What is Dev/Null?
+In case o=if you don't wanna print the output of a  command on terminal or write in a file
+
+We can redirect the output to
+/dev/null
+
+Example
+#cd /root &>/dev/null
+
+
+
+Print name of the script
+echo "The name of the script is: ${0}"
+
+
+
+Logging 
+
+Log message
+If you want to maintain the logging for you script you can logger in you r script.
+
+you can find the logs under
+/var/log/messages
+
+
+
+Debugging
+If we can enable the debugging of the script using below in the script 
+set -x
+
+If we want to exit our script when a command fail
+set -e
+
+
+
+Running script in background 
+nohup ./script.sh &
+
+
+Automate out Script
+At or Crontab
