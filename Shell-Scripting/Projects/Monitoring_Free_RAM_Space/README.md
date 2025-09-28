@@ -1,18 +1,23 @@
-# 📂 Shell Scripting Projects
+# 🖥️ Monitoring Free RAM Space
 
-This folder contains my **automation scripts and mini-projects** written in Bash.  
-These projects showcase my ability to automate system monitoring, user management, and daily DevOps tasks.
+This project is a simple **Bash script** that checks and displays the available **RAM (memory)** in your system.
 
 ---
 
-## 🔹 Project 1: Monitoring Free RAM Space
-**Path:** `Shell-Scripting/Projects/Monitoring_Free_RAM_Space/RAM_Status.sh`
+## 📌 Script Location
+`Shell-Scripting/Projects/Monitoring_Free_RAM_Space/RAM_Status.sh`
 
-- Checks the available **free RAM** in the system.  
-- Logs the current status of memory usage.  
-- Can be extended to trigger alerts if RAM usage crosses a threshold.  
+---
 
-**Usage:**
+## 🚀 Features
+- Shows free and used memory on the system.
+- Can be extended to send alerts when RAM usage crosses a threshold.
+- Lightweight and easy to run on any Linux system.
+
+---
+
+## 🛠️ Usage
+Give execute permission and run:
 ```bash
-bash RAM_Status.sh
-
+chmod +x RAM_Status.sh
+./RAM_Status.sh
