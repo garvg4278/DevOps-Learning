@@ -38,26 +38,3 @@ Make the script executable:
 
 chmod +x user.sh
 ```bash
----
-
-## Run the script as root:
-```bash
-sudo ./user.sh john "John Doe"
-```bash
----
-
-## Sample Output:
-username: john
-password: 8Jk@1n9LpQ
-host: kali
-
----
-
-## If not run as root:
-Error: This script must be run as root.
-
----
-
-## If username is missing:
-Usage: ./user.sh username [comment]
-
