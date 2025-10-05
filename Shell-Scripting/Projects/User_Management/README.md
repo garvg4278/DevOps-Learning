@@ -35,6 +35,30 @@ The script ensures it’s executed with **root privileges**, accepts a **usernam
 
 ## 🖥️ Usage
 Make the script executable:
-```bash
+
 chmod +x user.sh
 
+---
+
+## Run the script as root:
+
+sudo ./user.sh john "John Doe"
+
+---
+
+## Sample Output:
+username: john
+password: 8Jk@1n9LpQ
+host: kali
+
+---
+
+## If not run as root:
+Error: This script must be run as root.
+
+---
+
+## If username is missing:
+Usage: ./user.sh username [comment]
+
+```bash
