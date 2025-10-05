@@ -34,7 +34,7 @@ The script ensures it’s executed with **root privileges**, accepts a **usernam
 ---
 
 ## 🖥️ Usage
-Make the script executable:
+### Make the script executable:
 
 chmod +x user.sh
 ```bash
