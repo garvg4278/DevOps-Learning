@@ -37,13 +37,13 @@ The script ensures it’s executed with **root privileges**, accepts a **usernam
 Make the script executable:
 
 chmod +x user.sh
-
+```bash
 ---
 
 ## Run the script as root:
 
 sudo ./user.sh john "John Doe"
-
+```bash
 ---
 
 ## Sample Output:
@@ -61,4 +61,3 @@ Error: This script must be run as root.
 ## If username is missing:
 Usage: ./user.sh username [comment]
 
-```bash
