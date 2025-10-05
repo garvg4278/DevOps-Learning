@@ -41,7 +41,7 @@ chmod +x user.sh
 ---
 
 ## Run the script as root:
-
+```bash
 sudo ./user.sh john "John Doe"
 ```bash
 ---
