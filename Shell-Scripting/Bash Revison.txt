@@ -1,0 +1,195 @@
+1. What is Bash?
+Bash stands for Bourne Again Shell.
+It is both a command interpreter and a scripting language.
+Bash scripts typically use the `.sh` extension.
+
+Run a script:
+bash script.sh
+./script.sh
+
+Make script executable:
+chmod +x script.sh
+
+
+2. Script Structure
+Every script should start with a shebang line:
+#!/bin/bash
+
+This tells the system which interpreter should execute the script.
+
+
+3. Printing Output
+echo "Hello World"
+printf "Hello %s\n" "World"
+
+
+4. Variables
+name="Garv"
+age=21
+
+Access values:
+
+echo $name
+echo ${age}
+
+> Note: No spaces before or after `=`.
+
+
+5. User Input
+read username
+echo "You entered: $username"
+
+Prompt version:
+read -p "Enter your name: " name
+
+Hidden input (password):
+read -s password
+
+
+6. Special Variables
+ Variable	Meaning                     
+ `$0`        	Script name                 
+ `$1,$2...`  	Command-line arguments      
+ `$#`        	Number of arguments         
+ `$@`        	All arguments               
+ `$?`        	Exit status of last command 
+ `$$`        	Current script PID          
+
+Example:
+echo "Script name: $0"
+echo "Arguments count: $#"
+
+
+7. Conditional Statements
+
+if [ condition ]; then
+   commands
+elif [ condition ]; then
+   commands
+else
+   commands
+fi
+
+#Conditions Examples
+[ -f file.txt ]     	 	# File exists
+[ -d folder ]        		# Directory exists
+[ "$a" == "$b" ]   	# String equality
+[ $num -gt 10 ]      	# Numeric comparison
+
+Numeric Operators:
+
+Symbol  Meaning      
+ `-eq`   equal        
+ `-ne`   not equal    
+ `-gt`   greater than 
+ `-lt`   less than    
+ `-ge`   >=           
+ `-le`   <=           
+
+
+8. Case Statements
+case $choice in
+  a) echo "Add" ;;
+  b) echo "Subtract" ;;
+  ) echo "Invalid choice" ;;
+esac
+
+
+9. Loops
+
+#For Loop
+for i in 1 2 3 4; do
+  echo $i
+done
+
+Range format:
+for i in {1..10}; do echo $i; done
+
+#While Loop
+count=1
+while [ $count -le 5 ]; do
+  echo $count
+  ((count++))
+done
+
+#Until Loop
+x=10
+until [ $x -eq 0 ]; do
+  echo $x
+  ((x--))
+done
+
+
+10. Functions
+greet() {
+   echo "Hello $1"
+}
+greet "Garv"
+
+Returning values:
+sum() {
+   echo $(($1 + $2))
+}
+sum 10 20
+
+
+11. Arrays
+fruits=("apple" "banana" "mango")
+echo ${fruits[0]}
+echo ${fruits[@]}
+echo ${#fruits[@]}
+
+
+12. String Operations
+str="hello"
+echo ${#str}       # length
+echo ${str:0:2}    # substring
+echo ${str^^}      # uppercase
+echo ${str,,}      # lowercase
+
+
+13. Arithmetic
+a=10
+b=20
+echo $((a+b))
+expr $a + $b
+
+> Prefer `$(( ))` for modern scripts.
+
+
+14. Redirects & Pipes
+command > file       # overwrite
+command >> file      # append
+command 2> errors.log # only errors
+command1  command2   # pipe
+
+
+15. Exit Status
+if [ $? -eq 0 ]; then
+  echo "Success"
+else
+  echo "Failed"
+fi
+
+
+16. Cron Jobs (Task Scheduler)
+Open editor:
+crontab -e
+
+Schedule format:
+*  *  *  *  *     command
+┬ ┬ ┬ ┬ ┬
+│ │ │ │ └── Weekday
+│ │ │ └──── Month
+│ │ └────── Day
+│ └──────── Hour
+└────────── Minute
+
+Example:
+0 3    /home/user/backup.sh
+
+
+17. Debugging
+bash -x script.sh
+set -x   # start debug
+set +x   # stop debug
