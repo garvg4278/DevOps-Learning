@@ -125,11 +125,37 @@ Note:
 	docker stop / rm → Stop & remove containers
 	docker images → Lists stored images
 
+Common Runtime Commands
+-----------------------
+
+docker exec -it <container> <command>     → Run a command inside a running container
+docker logs -f <container>                → View and follow live logs
+docker attach <container>                 → Attach to the container’s main process
+docker stop <container>                   → Gracefully stop a running container
+docker kill <container>                   → Force stop (SIGKILL)
+docker restart <container>                → Restart a container
+docker rm <container>                     → Remove a stopped container
+docker ps -a                              → List all containers (including stopped)
+
+
 
 
 You can run multiple containers from the same Docker image without any conflict because each container runs in its own isolated environment. Each container can map its internal ports to different host ports, which allows multiple instances of the same application to run simultaneously.
 
 Containers can expose the same internal port, but must have unique host port mappings.
+
+Container Lifecycle
+-------------------
+
+docker create <image>     → Create a container without starting it
+docker start <container>  → Start a previously created container
+docker pause <container>  → Pause all processes inside the container
+docker unpause <container>→ Resume paused container
+docker rm <container>     → Remove a stopped container
+
+Lifecycle Summary:
+Create → Start → Run → Stop → Remove
+
 
 Container isolation is achieved using:
 	Namespaces (process, mount, network, user)
@@ -151,6 +177,19 @@ Multiple tags:
 
 Tag an existing image:
     docker tag myapp:01 myrepo/myapp:01
+
+Pushing Images to Registry
+--------------------------
+
+docker login                                 → Authenticate to Docker registry
+docker tag myapp:01 username/myapp:01        → Tag image for registry upload
+docker push username/myapp:01                → Upload image to registry
+
+Example Upload Flow:
+1. docker build -t myapp:01 .
+2. docker tag myapp:01 garv127/myapp:01
+3. docker push garv127/myapp:01
+
 
 
 
@@ -176,6 +215,25 @@ Docker allows version control of images, meaning older versions are not lost whe
    - Works seamlessly with pipelines and automation tools (Jenkins, GitHub Actions, GitLab CI, ArgoCD).
 
 Docker improves developer productivity, ensures consistent runtime environments, accelerates deployments, and provides versioned and isolated workloads suitable for modern DevOps and microservices architecture.
+
+
+
+Docker Image Layers & Caching
+-----------------------------
+
+Docker builds images in layers. Each instruction in the Dockerfile
+(RUN, COPY, ADD, CMD) creates a separate layer.
+
+If a layer does not change, Docker reuses the cached layer to speed up builds.
+
+Optimized layering example:
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+
+This ensures dependencies are installed only when requirements.txt changes.
+
 
 
 
@@ -314,6 +372,23 @@ The .dockerignore file filters out files from this context before copying happen
 The .dockerignore file improves security and performance during Docker builds by excluding unnecessary or sensitive files from the build context.
 
 
+ENTRYPOINT vs CMD
+-----------------
+
+Both are used to define what runs inside a container, but:
+
+ENTRYPOINT → Defines the main executable.
+CMD        → Provides default arguments to ENTRYPOINT.
+
+Example:
+
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+
+Result: python app.py
+
+
+
 
 Connecting a Container to a Local Database
 When working with Docker, applications running inside containers may need to access a database running on the host machine (local system).
@@ -324,3 +399,175 @@ To connect to the local (host) database, use:
 | -------------------------------- | ---------------------------------------- |
 | Windows / macOS (Docker Desktop) | `host.docker.internal`                   |
 | Linux                            | Host machine IP (typically `172.17.0.1`) |
+
+
+Cleanup Commands
+----------------
+
+docker system prune             → Remove unused data (keeps volumes)
+docker system prune -a          → Remove all unused containers, networks, images
+docker image prune              → Remove unused images
+docker container prune          → Remove stopped containers
+docker volume prune             → Remove unused volumes
+
+⚠ WARNING: `-a` removes ALL untagged and unused images — use carefully.
+
+
+
+
+Docker Network
+Creating a custom Docker network allows containers to communicate with each other using container names instead of IP addresses. This makes container networking more reliable and easier to manage, especially in multi-container applications.
+
+	docker network create my-net
+
+| Default Bridge Network           | Custom Network                       |
+| -------------------------------- | ------------------------------------ |
+| Containers communicate using IPs | Containers communicate using names   |
+| No automatic DNS                 | Built-in DNS resolution              |
+| Not ideal for microservices      | Recommended for multi-container apps |
+
+Useful Network Commands
+| Command                                     | Purpose                                        |
+| ------------------------------------------- | ---------------------------------------------- |
+| `docker network ls`                         | List networks                                  |
+| `docker network inspect my-net`             | See network details (IPs, attached containers) |
+| `docker network connect my-net <container>` | Attach a container to an existing network      |
+| `docker network rm my-net`                  | Remove a network                               |
+
+Creating a custom Docker network enables containers to communicate securely using built-in DNS name resolution. This is essential for microservices, multi-container deployments, and Docker-Compose setups.
+
+Docker Networking
+Docker networking enables communication between containers, the host system, and external clients. Networking is essential when building multi-container applications (API + database, frontend + backend, etc.).
+
+
+Default Docker Network Types
+When Docker is installed, it creates three default networks:
+| Network Type         | Description                        | Use Case                                   | Communication                                      |
+| -------------------- | ---------------------------------- | ------------------------------------------ | -------------------------------------------------- |
+| **bridge** (default) | NAT-based private internal network | Local development                          | Containers can communicate only if in same network |
+| **host**             | Shares host network stack          | High-performance apps needing no isolation | No port mapping needed                             |
+| **none**             | No networking                      | Fully isolated container                   | Completely disconnected                            |
+
+
+User-Defined Bridge Networks
+
+User-created networks provide:
+-> Built-in DNS (containers reach each other by name)
+-> Better isolation
+-> Custom network control
+
+Create a network:
+	docker network create my-net
+Run containers inside the network:
+	docker run -d --name db --network my-net mysql
+	docker run -d --name app --network my-net flask-api
+Inside app, the DB is reachable as:
+	mysql://db:3306
+
+Exposing vs Publishing Ports
+| Type                          | Dockerfile                                | Runtime Accessibility                | Example        |
+| ----------------------------- | ----------------------------------------- | ------------------------------------ | -------------- |
+| **EXPOSE (internal hint)**    | Used only as documentation                | Does *not* open port to host         | `EXPOSE 5000`  |
+| **Publish (-p or --publish)** | Makes container port available externally | Required to access from host/browser | `-p 8080:5000` |
+
+
+docker run -d -p 8080:5000 myapp
+| Value  | Meaning               |
+| ------ | --------------------- |
+| `5000` | Port inside container |
+| `8080` | Port on host machine  |
+
+Docker Compose Networking
+Docker Compose automatically creates a network for all services, and containers communicate using service names as hostnames.
+
+Example docker-compose.yml:
+
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: admin
+
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+
+-> The service name db becomes the hostname.
+-> No need to manually define or connect networks unless custom behavior is needed.
+
+In Docker, communication between containers is best handled using user-defined networks where services discover each other by name. External access requires port publishing, whereas internal exposure uses EXPOSE. Docker Compose simplifies this by creating a default network where all services communicate securely.
+
+Docker Network Modes Summary
+----------------------------
+
+| Network Mode | Behavior                       | Use Case                          |
+|--------------|--------------------------------|----------------------------------|
+| bridge       | Default isolated network        | Most standalone containers       |
+| host         | Shares host networking stack    | High performance apps            |
+| none         | No networking                   | Secure isolated workloads        |
+| custom       | User-defined with DNS          | Microservices & multi-container apps |
+
+Custom networks support automatic hostname resolution,
+so containers communicate using names, not IP addresses.
+
+
+
+Docker Compose
+Docker Compose is a tool that allows you to define and manage multi-container applications using a configuration file (docker-compose.yml). It automates container creation, networking, environment variables, storage, and startup order — all from a single command.
+
+| Without Compose                     | With Docker Compose         |
+| ----------------------------------- | --------------------------- |
+| Need multiple `docker run` commands | One file defines everything |
+| Manual networking setup             | Automatic shared network    |
+| Hard to maintain                    | Version-controlled config   |
+| Difficult to manage scaling         | Built-in scaling support    |
+
+In real projects, you may need:
+-> API container
+-> Database container
+-> Cache container
+-> Web server container
+Compose manages them together as one application.
+
+| Command                  | Purpose                             |
+| ------------------------ | ----------------------------------- |
+| `docker compose up`      | Start containers                    |
+| `docker compose up -d`   | Start in background (detached mode) |
+| `docker compose down`    | Stop and remove containers, network |
+| `docker compose ps`      | List running services               |
+| `docker compose logs -f` | View live logs                      |
+
+Networking in Compose
+-> All services in the same Compose file join the same automatic network.
+-> Containers communicate using service names, not IPs.
+
+Example:
+	app container can connect to PostgreSQL using hostname: database
+
+Scaling in Docker Compose
+-------------------------
+
+docker compose up --scale <service>=<number>
+
+Example:
+docker compose up --scale app=3
+
+This runs 3 replicas of the `app` service (stateless recommended).
+
+
+Docker Compose is used to define, run, and manage multi-container applications using a YAML file. It ensures containers start in the correct order, share networking automatically, and can be easily scaled or version-controlled.
+
+Security Best Practices
+-----------------------
+
+- Use minimal base images (alpine, distroless) to reduce attack surface
+- Avoid running processes as root:
+    USER nonroot
+- Do not store secrets inside images or commit .env files
+- Use .dockerignore to prevent accidental secret leakage
+- Scan images for vulnerabilities (Docker Scout, Trivy)
